@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gráfico de Pizza</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    body{
+        background-image: linear-gradient(to left, #ff60e5, #ffa0f2, #ff74f8);
+        color: #ffffff;
+        text-align: center;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    canvas {
+      display: block;
+      margin: 30px auto;
+    }
+    h1{
+      margin: 30px;
+    }
+    input{
+      font-size: 24px;
+      font-weight: bold;
+      width: 260px;
+      padding: 20px 40px;
+      border: 2px solid rgb(255, 214, 160);
+      border-radius: 50px;
+      cursor: pointer;
+      margin-bottom: 35px;
+    }
+    button{
+        background-color: #ff000dab;
+        color: #ffffff;
+        font-size: 25px;
+        border-radius: 20px;
+        border: none;
+        height: 45px;
+        width: 185px;
+        box-shadow: 0 6px #bb0009bb;
+        transition: .4s;
+    }
+    button:active{
+      transform: translateY(0.5vh);
+      box-shadow: 0 2px #bb0009bb;
+    }
+    .botao{
+      height: 65px;
+      opacity: 0;
+      visibility: hidden;
+    }
+    .botao.ativo{
+      opacity: 1;
+      visibility: visible;
+    }
+    .a{
+      margin-top: -20px;
+      margin-bottom: 20px;
+    }
+    .b{
+      margin: 20px 0 -5px;
+      color: rgb(255, 96, 229);
+    }
+    .heart {
+      color: rgba(255, 23, 23, 0.829);
+      height: 80px;
+      width: 80px;
+      animation: 3s pulse linear infinite;
+    }
+    @keyframes pulse{
+    0% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+  </style>
+</head>
+<body>
+  <h1>Porcentagem do meu</h1> 
+  <div class="a"><ion-icon name="heart" class="heart"></ion-icon></div>
+  <h2>Antes de tudo, digite só o seu primeiro nome:</h2>
+  <div class="b"><input type="text" id="check"></div>
+  <button onclick="Checagem()">calcular</button>
+  <canvas id="myChart" width="400" height="400"></canvas>
+  <button onclick="exibirGraficoDois()" class="botao">exibir o verdadeiro</button>
+  <canvas id="myChartDois" width="400" height="400"></canvas>
+  <script>
+    const btn = document.querySelector('.botao');
+    const nome = document.getElementById("check");
+    function Checagem() {
+      switch (nome.value) {
+        case "annye":
+          case "Annye": 
+            case "ANNYE":
+                exibirGrafico();
+          break;
+        default:
+          graficoPalmeiras();
+          break;
+      }
+    }
+    function exibirGrafico() {
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Você', 'Paulin', 'Palmeiras'],
+          datasets: [{
+            label: 'Meu coração',
+            data: [10, 40, 60],
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(0, 168, 14)'
+            ],
+            hoverOffset: 4
+          }]
+        }
+      });
+      btnDois();
+    };
+    function exibirGraficoDois() {
+      var ctx2 = document.getElementById('myChartDois').getContext('2d');
+      var myChart2 = new Chart (ctx2, {
+        type: 'pie',
+        data: {
+          labels: ['Você', 'Você de novo!!', 'Paulin'],
+          datasets: [{
+            label: 'Meu coração',
+            data: [98, 2, 10],
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(0, 168, 14)'
+            ],
+            hoverOffset: 3
+          }]
+        }
+      })
+    }
+    function graficoPalmeiras() {
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['PALMEIRAS', 'programação', 'skate', 'a fedida da camila'],
+          datasets: [{
+            label: 'Meu coração',
+            data: [100, 10, 5, 2],
+            backgroundColor: [
+              'rgb(0, 168, 14)',
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 96, 229)'
+            ],
+            hoverOffset: 4
+          }]
+        }
+      });
+    }
+    function btnDois() {
+      btn.classList.add('ativo');
+    }
+  </script> 
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
